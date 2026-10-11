@@ -1,6 +1,6 @@
 # MoveBandhu (Kolhapur • Sangli • Satara) — Pure JavaScript MERN Stack
 
-Welcome to **MoveMate**, the Western Maharashtra home shifting and logistics platform covering **Kolhapur (MH 09)**, **Sangli (MH 10)**, and **Satara (MH 11)**!
+Welcome to **MoveBandhu**, the Western Maharashtra home shifting and logistics platform covering **Kolhapur (MH 09)**, **Sangli (MH 10)**, and **Satara (MH 11)**!
 
 ## Pure MERN Stack (Zero TypeScript / TSX)
 This archive contains 100% pure standard JavaScript code:
