@@ -216,9 +216,31 @@ export const api = {
       });
       return handleResponse(res);
     },
+    async getUsers() {
+      const res = await fetch(`${API_BASE}/admin/users`, {
+        headers: getAuthHeaders()
+      });
+      return handleResponse(res);
+    },
+    async getRevenueAnalytics() {
+      const res = await fetch(`${API_BASE}/admin/revenue-analytics`, {
+        headers: getAuthHeaders()
+      });
+      return handleResponse(res);
+    },
+    async getAuditLogs() {
+      const res = await fetch(`${API_BASE}/admin/audit-logs`, {
+        headers: getAuthHeaders()
+      });
+      return handleResponse(res);
+    },
     getExportCsvUrl() {
       const token = localStorage.getItem("movebandhu_token") || localStorage.getItem("movemate_token");
       return `${API_BASE}/admin/export/bookings-csv?token=${token}`;
+    },
+    getExportAuditLogsCsvUrl() {
+      const token = localStorage.getItem("movebandhu_token") || localStorage.getItem("movemate_token");
+      return `${API_BASE}/admin/export/audit-logs-csv?token=${token}`;
     }
   }
 };

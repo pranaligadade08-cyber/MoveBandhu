@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import { X, Lock, Mail, User, Phone, Truck, AlertCircle } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { X, Lock, Mail, User, Phone, Truck, AlertCircle, ShieldCheck } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { useAuth } from "../context/AuthContext";
+import { useTheme } from "../context/ThemeContext";
 
 export const AuthModal = ({
   isOpen,
@@ -12,6 +14,9 @@ export const AuthModal = ({
 }) => {
   const { t } = useLanguage();
   const { login, register } = useAuth();
+  const { isDark } = useTheme();
+  const navigate = useNavigate();
+
   const [mode, setMode] = useState(initialMode);
   const [role, setRole] = useState(initialRole);
   const [email, setEmail] = useState("");
@@ -64,10 +69,14 @@ export const AuthModal = ({
               : undefined
         });
       }
-      if (onSuccess) {
+
+      onClose();
+
+      if (authedUser?.role === "admin") {
+        navigate("/admin");
+      } else if (onSuccess) {
         onSuccess(authedUser);
       }
-      onClose();
     } catch (err) {
       setErrorMsg(err.message || "Authentication failed. Please check your credentials.");
     } finally {
@@ -75,9 +84,20 @@ export const AuthModal = ({
     }
   };
 
+  // Theme-aware styles to eliminate blurry whitish boxes in dark mode
+  const modalBoxClass = isDark
+    ? "bg-[#140F22] border border-white/15 text-white shadow-[0_25px_70px_rgba(0,0,0,0.8)]"
+    : "bg-white border border-pink-200/60 text-gray-900 shadow-[0_25px_60px_rgba(221,42,123,0.15)]";
+
+  const inputClass = isDark
+    ? "bg-[#211A34] border border-white/20 text-white placeholder-gray-500 focus:border-[#DD2A7B] focus:ring-2 focus:ring-[#DD2A7B]/30"
+    : "bg-gray-50/80 border border-gray-200 text-gray-900 placeholder-gray-400 focus:border-[#DD2A7B] focus:ring-2 focus:ring-[#DD2A7B]/20";
+
+  const labelClass = isDark ? "text-gray-200 font-bold" : "text-gray-800 font-bold";
+
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
-      <div className="relative w-full max-w-md glass-modal rounded-3xl shadow-2xl border border-white/60 overflow-hidden my-6 animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/75 backdrop-blur-md flex items-center justify-center p-3 sm:p-4">
+      <div className={`relative w-full max-w-md rounded-3xl overflow-hidden my-6 animate-in fade-in zoom-in-95 duration-200 transition-colors ${modalBoxClass}`}>
         
         {/* Header */}
         <div className="bg-gradient-to-r from-[#BE185D] via-[#9333EA] to-[#4338CA] text-white p-6 relative">
@@ -96,7 +116,8 @@ export const AuthModal = ({
             />
             <div>
               <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-white/20 text-white text-[10px] font-bold uppercase tracking-wider border border-white/30 backdrop-blur-md">
-                <span>MoveBandhu Security</span>
+                <ShieldCheck className="w-3 h-3 text-pink-200" />
+                <span>MoveBandhu Secure Portal</span>
               </div>
             </div>
           </div>
@@ -105,28 +126,34 @@ export const AuthModal = ({
           </h2>
           <p className="text-xs text-white/90 mt-1">
             {mode === "login"
-              ? "Sign in to manage your bookings and driver updates."
-              : "Create an account to track shipments and access member benefits."}
+              ? "Sign in to access your customer bookings, partner driver portal, or admin ops center."
+              : "Create an account to book moves and manage shipments."}
           </p>
         </div>
 
         {/* Form Body */}
         <form onSubmit={handleSubmit} className="p-6 space-y-4 max-h-[75vh] overflow-y-auto">
           {errorMsg && (
-            <div className="p-3.5 rounded-2xl bg-red-50/90 border border-red-200 text-red-700 text-xs font-semibold flex items-center gap-2">
-              <AlertCircle className="w-4 h-4 flex-shrink-0" />
+            <div className="p-3.5 rounded-2xl bg-red-500/15 border border-red-500/30 text-red-400 text-xs font-semibold flex items-center gap-2">
+              <AlertCircle className="w-4 h-4 flex-shrink-0 text-red-400" />
               <span>{errorMsg}</span>
             </div>
           )}
 
-          {/* If registering, select Role */}
+          {/* Registration Role Selector (Customers & Partner Drivers Only) */}
           {mode === "register" && (
-            <div className="flex rounded-2xl bg-gray-100/80 p-1 mb-2">
+            <div className={`flex rounded-2xl p-1 mb-2 border ${isDark ? "bg-[#211A34] border-white/10" : "bg-gray-100 border-gray-200"}`}>
               <button
                 type="button"
                 onClick={() => setRole("customer")}
                 className={`flex-1 py-2 text-xs font-bold rounded-xl transition cursor-pointer ${
-                  role === "customer" ? "bg-white shadow-sm text-gray-900" : "text-gray-500"
+                  role === "customer"
+                    ? isDark
+                      ? "bg-gradient-to-r from-[#BE185D] to-[#9333EA] text-white shadow-md"
+                      : "bg-white shadow-sm text-gray-900 border border-pink-200"
+                    : isDark
+                    ? "text-gray-400 hover:text-white"
+                    : "text-gray-600 hover:text-gray-900"
                 }`}
               >
                 Customer (ग्राहक)
@@ -135,7 +162,13 @@ export const AuthModal = ({
                 type="button"
                 onClick={() => setRole("partner")}
                 className={`flex-1 py-2 text-xs font-bold rounded-xl transition cursor-pointer ${
-                  role === "partner" ? "bg-white shadow-sm text-purple-700" : "text-gray-500"
+                  role === "partner"
+                    ? isDark
+                      ? "bg-gradient-to-r from-[#BE185D] to-[#9333EA] text-white shadow-md"
+                      : "bg-white shadow-sm text-purple-700 border border-purple-200"
+                    : isDark
+                    ? "text-gray-400 hover:text-white"
+                    : "text-gray-600 hover:text-gray-900"
                 }`}
               >
                 Partner Driver (वाहतूकदार)
@@ -147,7 +180,7 @@ export const AuthModal = ({
           {mode === "register" && (
             <>
               <div>
-                <label className="text-xs font-bold text-slate-800 dark:text-slate-100 block mb-1">
+                <label className={`text-xs block mb-1 ${labelClass}`}>
                   {t.fullName}
                 </label>
                 <div className="relative">
@@ -158,13 +191,13 @@ export const AuthModal = ({
                     placeholder="e.g. Santosh Patil"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full text-xs pl-9 pr-3 py-3 glass-input rounded-xl focus:outline-none"
+                    className={`w-full text-xs pl-9 pr-3 py-3 rounded-xl focus:outline-none transition-colors ${inputClass}`}
                   />
                 </div>
               </div>
 
               <div>
-                <label className="text-xs font-bold text-slate-800 dark:text-slate-100 block mb-1">
+                <label className={`text-xs block mb-1 ${labelClass}`}>
                   {t.mobileNumber} (Indian 10-digit)
                 </label>
                 <div className="relative">
@@ -175,21 +208,23 @@ export const AuthModal = ({
                     placeholder="98223 45678"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    className="w-full text-xs pl-9 pr-3 py-3 glass-input rounded-xl focus:outline-none"
+                    className={`w-full text-xs pl-9 pr-3 py-3 rounded-xl focus:outline-none transition-colors ${inputClass}`}
                   />
                 </div>
               </div>
 
-              {/* Extra fields if registering as Partner */}
+              {/* Partner Driver Details */}
               {role === "partner" && (
-                <div className="p-4 bg-purple-50/50 border border-purple-200/60 rounded-2xl space-y-3">
-                  <div className="text-xs font-bold text-purple-700 flex items-center gap-1.5">
+                <div className={`p-4 rounded-2xl space-y-3 border ${
+                  isDark ? "bg-[#211A34]/70 border-purple-500/30" : "bg-purple-50/80 border-purple-200"
+                }`}>
+                  <div className={`text-xs font-bold flex items-center gap-1.5 ${isDark ? "text-purple-300" : "text-purple-700"}`}>
                     <Truck className="w-4 h-4" />
                     <span>Transporter & Vehicle Details</span>
                   </div>
 
                   <div>
-                    <label className="text-[11px] font-semibold text-gray-700 block mb-1">
+                    <label className={`text-[11px] font-semibold block mb-1 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
                       Business or Transport Name
                     </label>
                     <input
@@ -197,19 +232,19 @@ export const AuthModal = ({
                       placeholder="e.g. Patil Kolhapur Cargo"
                       value={businessName}
                       onChange={(e) => setBusinessName(e.target.value)}
-                      className="w-full text-xs p-2.5 glass-input rounded-xl focus:outline-none"
+                      className={`w-full text-xs p-2.5 rounded-xl focus:outline-none transition-colors ${inputClass}`}
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <label className="text-[11px] font-semibold text-gray-700 block mb-1">
+                      <label className={`text-[11px] font-semibold block mb-1 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
                         Vehicle Type
                       </label>
                       <select
                         value={vehicleType}
                         onChange={(e) => setVehicleType(e.target.value)}
-                        className="w-full text-xs p-2.5 glass-input rounded-xl focus:outline-none"
+                        className={`w-full text-xs p-2.5 rounded-xl focus:outline-none transition-colors ${inputClass}`}
                       >
                         <option value="Tata Ace (Chhota Hathi)">Tata Ace (Chhota Hathi)</option>
                         <option value="Bolero Maxi Truck">Bolero Maxi Truck</option>
@@ -219,7 +254,7 @@ export const AuthModal = ({
                     </div>
 
                     <div>
-                      <label className="text-[11px] font-semibold text-gray-700 block mb-1">
+                      <label className={`text-[11px] font-semibold block mb-1 ${isDark ? "text-gray-300" : "text-gray-700"}`}>
                         Vehicle No. (MH 09...)
                       </label>
                       <input
@@ -227,7 +262,7 @@ export const AuthModal = ({
                         placeholder="MH 09 CW 1234"
                         value={vehicleNumber}
                         onChange={(e) => setVehicleNumber(e.target.value)}
-                        className="w-full text-xs p-2.5 glass-input rounded-xl focus:outline-none"
+                        className={`w-full text-xs p-2.5 rounded-xl focus:outline-none transition-colors ${inputClass}`}
                       />
                     </div>
                   </div>
@@ -236,9 +271,9 @@ export const AuthModal = ({
             </>
           )}
 
-          {/* Email */}
+          {/* Email Address */}
           <div>
-            <label className="text-xs font-bold text-slate-800 dark:text-slate-100 block mb-1">
+            <label className={`text-xs block mb-1 ${labelClass}`}>
               {t.emailAddress}
             </label>
             <div className="relative">
@@ -249,14 +284,14 @@ export const AuthModal = ({
                 placeholder="name@example.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full text-xs pl-9 pr-3 py-3 glass-input rounded-xl focus:outline-none"
+                className={`w-full text-xs pl-9 pr-3 py-3 rounded-xl focus:outline-none transition-colors ${inputClass}`}
               />
             </div>
           </div>
 
           {/* Password */}
           <div>
-            <label className="text-xs font-bold text-slate-800 dark:text-slate-100 block mb-1">
+            <label className={`text-xs block mb-1 ${labelClass}`}>
               Password (min 6 characters)
             </label>
             <div className="relative">
@@ -267,7 +302,7 @@ export const AuthModal = ({
                 placeholder="••••••••"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full text-xs pl-9 pr-3 py-3 glass-input rounded-xl focus:outline-none"
+                className={`w-full text-xs pl-9 pr-3 py-3 rounded-xl focus:outline-none transition-colors ${inputClass}`}
               />
             </div>
           </div>
@@ -276,13 +311,13 @@ export const AuthModal = ({
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full py-3.5 px-4 rounded-xl btn-ig text-white font-extrabold text-sm shadow-lg shadow-purple-500/25 transition disabled:opacity-50 cursor-pointer mt-2"
+            className="w-full py-3.5 px-4 rounded-xl btn-ig text-white font-extrabold text-sm shadow-lg shadow-purple-500/25 transition disabled:opacity-50 cursor-pointer mt-2 hover:opacity-95"
           >
             {isSubmitting ? "Processing..." : mode === "login" ? t.login : t.register}
           </button>
 
           {/* Toggle Login / Register */}
-          <div className="pt-2 text-center text-xs text-gray-600">
+          <div className={`pt-2 text-center text-xs ${isDark ? "text-gray-400" : "text-gray-600"}`}>
             {mode === "login" ? (
               <span>
                 Don't have an account?{" "}
@@ -292,7 +327,7 @@ export const AuthModal = ({
                     setMode("register");
                     setErrorMsg(null);
                   }}
-                  className="font-bold text-purple-600 hover:underline cursor-pointer"
+                  className={`font-bold hover:underline cursor-pointer ${isDark ? "text-pink-400" : "text-purple-600"}`}
                 >
                   Create one now
                 </button>
@@ -306,7 +341,7 @@ export const AuthModal = ({
                     setMode("login");
                     setErrorMsg(null);
                   }}
-                  className="font-bold text-purple-600 hover:underline cursor-pointer"
+                  className={`font-bold hover:underline cursor-pointer ${isDark ? "text-pink-400" : "text-purple-600"}`}
                 >
                   Sign in
                 </button>

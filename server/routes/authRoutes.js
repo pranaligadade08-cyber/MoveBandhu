@@ -15,6 +15,10 @@ router.post("/register", async (req, res) => {
       res.status(400).json({ error: "Please provide name, email, phone number, and password." });
       return;
     }
+    if (role === "admin" || (email && email.toLowerCase().trim() === "pranaligadade04@gmail.com")) {
+      res.status(403).json({ error: "Admin accounts cannot be registered publicly. Please log in directly with your admin credentials." });
+      return;
+    }
     if (!isValidIndianPhone(phone)) {
       res.status(400).json({ error: "Please enter a valid 10-digit Indian mobile number." });
       return;
@@ -101,6 +105,16 @@ router.post("/login", async (req, res) => {
       return;
     }
     const token = generateToken(user);
+    if (user.role === "admin") {
+      dbStore.addAuditLog({
+        actorEmail: user.email,
+        actorRole: "admin",
+        action: "ADMIN_LOGIN",
+        entityType: "AUTH",
+        details: `Admin ${user.name} logged in successfully`,
+        ipAddress: req.ip || "127.0.0.1"
+      });
+    }
     const partnerProfile = user.role === "partner" ? dbStore.getPartnerByUserId(user._id) : void 0;
     res.json({
       message: "Logged in successfully",

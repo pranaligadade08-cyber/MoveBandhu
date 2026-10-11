@@ -1,6 +1,16 @@
 {
   "users": [
     {
+      "_id": "usr-admin-pranali",
+      "name": "Pranali Gadade (Admin)",
+      "email": "pranaligadade04@gmail.com",
+      "phone": "+918855029692",
+      "passwordHash": "$2b$10$S34CM6SXPMg5lQprlz5oYeJ8K4eHkzqJXkdV/WDhB7PF1p6D2uVZy",
+      "role": "admin",
+      "createdAt": "2026-10-10T16:23:51.413Z",
+      "updatedAt": "2026-10-11T22:00:00.000Z"
+    },
+    {
       "_id": "usr-admin-1",
       "name": "MoveBandhu Kolhapur Admin",
       "email": "admin@movebandhu.in",
@@ -399,6 +409,18 @@
       "serviceName": "Office & Clinic Relocation",
       "location": "Sadar Bazar, Satara",
       "createdAt": "2026-10-08T16:23:51.414Z"
+    }
+  ],
+  "auditLogs": [
+    {
+      "_id": "log-1791738487523-904",
+      "timestamp": "2026-10-11T17:08:07.523Z",
+      "actorEmail": "pranaligadade04@gmail.com",
+      "actorRole": "admin",
+      "action": "ADMIN_LOGIN",
+      "entityType": "AUTH",
+      "details": "Admin Pranali Gadade (Admin) logged in successfully",
+      "ipAddress": "127.0.0.1"
     }
   ]
 }

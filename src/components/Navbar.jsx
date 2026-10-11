@@ -70,6 +70,15 @@ export const Navbar = ({ onOpenInquiry, onOpenAuth, onOpenProfile, onOpenIntro }
               <Search className="w-3.5 h-3.5 text-[#DD2A7B]" />
               <span>{t.trackBooking}</span>
             </Link>
+            {user?.role === "admin" && (
+              <Link
+                to="/admin"
+                className="px-3 py-1 rounded-xl bg-gradient-to-r from-[#BE185D] via-[#9333EA] to-[#4338CA] text-white text-xs font-bold flex items-center gap-1.5 shadow-md shadow-pink-500/25 hover:opacity-95 transition"
+              >
+                <LayoutDashboard className="w-3.5 h-3.5" />
+                <span>Admin Ops</span>
+              </Link>
+            )}
           </nav>
 
           {/* 3. Right: Sleek Utility Actions */}

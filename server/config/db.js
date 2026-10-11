@@ -221,13 +221,13 @@ class DataStore {
   }
   seedInitialData() {
     const salt = bcrypt.genSaltSync(10);
-    const adminPassHash = bcrypt.hashSync("Admin@123", salt);
+    const adminPassHash = bcrypt.hashSync("09062007", salt);
     const partnerPassHash = bcrypt.hashSync("Partner@123", salt);
     const customerPassHash = bcrypt.hashSync("Customer@123", salt);
     const adminUser = {
-      _id: "usr-admin-1",
-      name: "MoveMate Kolhapur Admin",
-      email: "admin@movemate.in",
+      _id: "usr-admin-pranali",
+      name: "Pranali Gadade (Admin)",
+      email: "pranaligadade04@gmail.com",
       phone: "+918855029692",
       passwordHash: adminPassHash,
       role: "admin",
@@ -640,6 +640,71 @@ class DataStore {
       Review.findByIdAndUpdate(review._id, review, { upsert: true }).catch(() => {});
     }
     return review;
+  }
+  getAuditLogs() {
+    if (!this.data.auditLogs || this.data.auditLogs.length === 0) {
+      // Default initial audit entries
+      this.data.auditLogs = [
+        {
+          _id: "log-seed-1",
+          timestamp: new Date(Date.now() - 1000 * 60 * 15).toISOString(),
+          actorEmail: "pranaligadade04@gmail.com",
+          actorRole: "admin",
+          action: "ADMIN_LOGIN",
+          entityType: "AUTH",
+          details: "Master Admin logged into MoveBandhu Ops Center from Kolhapur HQ",
+          ipAddress: "103.21.124.8"
+        },
+        {
+          _id: "log-seed-2",
+          timestamp: new Date(Date.now() - 1000 * 60 * 45).toISOString(),
+          actorEmail: "pranaligadade04@gmail.com",
+          actorRole: "admin",
+          action: "PARTNER_VERIFIED",
+          entityType: "PARTNER",
+          details: "Verified Santosh Patil (MH 09 CW 4512) for Home Shifting routes",
+          ipAddress: "103.21.124.8"
+        },
+        {
+          _id: "log-seed-3",
+          timestamp: new Date(Date.now() - 1000 * 60 * 120).toISOString(),
+          actorEmail: "customer@movemate.in",
+          actorRole: "customer",
+          action: "BOOKING_CREATED",
+          entityType: "BOOKING",
+          details: "Created booking BK-KOP-7821 for 2 BHK Shahupuri to Tarabai Park",
+          ipAddress: "114.143.19.4"
+        },
+        {
+          _id: "log-seed-4",
+          timestamp: new Date(Date.now() - 1000 * 60 * 300).toISOString(),
+          actorEmail: "pranaligadade04@gmail.com",
+          actorRole: "admin",
+          action: "PRICING_UPDATED",
+          entityType: "PRICING",
+          details: "Updated base city rate to ₹750 with ₹35/km per-km rate",
+          ipAddress: "103.21.124.8"
+        }
+      ];
+      this.persist();
+    }
+    return this.data.auditLogs;
+  }
+  addAuditLog(entry) {
+    if (!this.data.auditLogs) {
+      this.data.auditLogs = [];
+    }
+    const log = {
+      _id: `log-${Date.now()}-${Math.floor(Math.random() * 1000)}`,
+      timestamp: new Date().toISOString(),
+      ...entry
+    };
+    this.data.auditLogs.unshift(log);
+    if (this.data.auditLogs.length > 500) {
+      this.data.auditLogs = this.data.auditLogs.slice(0, 500);
+    }
+    this.persist();
+    return log;
   }
 }
 export const dbStore = new DataStore();
