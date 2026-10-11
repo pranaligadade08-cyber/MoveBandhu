@@ -37,5 +37,5 @@ This archive contains 100% pure standard JavaScript code:
 - **Satara Partner (More Cargo):** `tanaji.satara@movemate.in` / `Partner@123`
 - **Customer:** `customer@movemate.in` / `Customer@123`
 
-MoveMate — "Move anything. Without the headache."
+MoveBandhu — "Move anything. Without the headache."
 कोल्हापूर, सांगली आणि सातारा | MH 09 • MH 10 • MH 11
