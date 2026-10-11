@@ -2,6 +2,13 @@ import mongoose from "mongoose";
 import fs from "fs";
 import path from "path";
 import bcrypt from "bcryptjs";
+import User from "../models/User.js";
+import Booking from "../models/Booking.js";
+import Inquiry from "../models/Inquiry.js";
+import PartnerProfile from "../models/PartnerProfile.js";
+import PricingRule from "../models/PricingRule.js";
+import Review from "../models/Review.js";
+import Service from "../models/Service.js";
 const DATA_DIR = path.resolve(process.cwd(), "data");
 const DATA_FILE = path.join(DATA_DIR, "movebandhu_store.json");
 const DEFAULT_PRICING = {
@@ -487,6 +494,9 @@ class DataStore {
   addUser(user) {
     this.data.users.push(user);
     this.persist();
+    if (mongoose.connection.readyState === 1) {
+      User.findByIdAndUpdate(user._id, user, { upsert: true }).catch(() => {});
+    }
     return user;
   }
   updateUser(id, updates) {
@@ -494,6 +504,9 @@ class DataStore {
     if (idx !== -1) {
       this.data.users[idx] = { ...this.data.users[idx], ...updates, updatedAt: (/* @__PURE__ */ new Date()).toISOString() };
       this.persist();
+      if (mongoose.connection.readyState === 1) {
+        User.findByIdAndUpdate(id, this.data.users[idx], { upsert: true }).catch(() => {});
+      }
       return this.data.users[idx];
     }
     return null;
@@ -510,6 +523,9 @@ class DataStore {
   addPartnerProfile(profile) {
     this.data.partnerProfiles.push(profile);
     this.persist();
+    if (mongoose.connection.readyState === 1) {
+      PartnerProfile.findByIdAndUpdate(profile._id, profile, { upsert: true }).catch(() => {});
+    }
     return profile;
   }
   updatePartnerProfile(id, updates) {
@@ -517,6 +533,9 @@ class DataStore {
     if (idx !== -1) {
       this.data.partnerProfiles[idx] = { ...this.data.partnerProfiles[idx], ...updates };
       this.persist();
+      if (mongoose.connection.readyState === 1) {
+        PartnerProfile.findByIdAndUpdate(id, this.data.partnerProfiles[idx], { upsert: true }).catch(() => {});
+      }
       return this.data.partnerProfiles[idx];
     }
     return null;
@@ -529,6 +548,9 @@ class DataStore {
     if (idx !== -1) {
       this.data.services[idx] = { ...this.data.services[idx], ...updates };
       this.persist();
+      if (mongoose.connection.readyState === 1) {
+        Service.findByIdAndUpdate(id, this.data.services[idx], { upsert: true }).catch(() => {});
+      }
       return this.data.services[idx];
     }
     return null;
@@ -539,6 +561,9 @@ class DataStore {
   updatePricingRules(rules) {
     this.data.pricingRules = { ...this.data.pricingRules, ...rules, updatedAt: (/* @__PURE__ */ new Date()).toISOString() };
     this.persist();
+    if (mongoose.connection.readyState === 1) {
+      PricingRule.findByIdAndUpdate(this.data.pricingRules._id, this.data.pricingRules, { upsert: true }).catch(() => {});
+    }
     return this.data.pricingRules;
   }
   getInquiries() {
@@ -550,6 +575,9 @@ class DataStore {
   addInquiry(inquiry) {
     this.data.inquiries.unshift(inquiry);
     this.persist();
+    if (mongoose.connection.readyState === 1) {
+      Inquiry.findByIdAndUpdate(inquiry._id, inquiry, { upsert: true }).catch(() => {});
+    }
     return inquiry;
   }
   updateInquiry(id, updates) {
@@ -557,6 +585,9 @@ class DataStore {
     if (idx !== -1) {
       this.data.inquiries[idx] = { ...this.data.inquiries[idx], ...updates };
       this.persist();
+      if (mongoose.connection.readyState === 1) {
+        Inquiry.findByIdAndUpdate(id, this.data.inquiries[idx], { upsert: true }).catch(() => {});
+      }
       return this.data.inquiries[idx];
     }
     return null;
@@ -570,6 +601,9 @@ class DataStore {
   addBooking(booking) {
     this.data.bookings.unshift(booking);
     this.persist();
+    if (mongoose.connection.readyState === 1) {
+      Booking.findByIdAndUpdate(booking._id, booking, { upsert: true }).catch(() => {});
+    }
     return booking;
   }
   updateBooking(id, updates) {
@@ -589,6 +623,9 @@ class DataStore {
       }
       this.data.bookings[idx] = updated;
       this.persist();
+      if (mongoose.connection.readyState === 1) {
+        Booking.findByIdAndUpdate(id, updated, { upsert: true }).catch(() => {});
+      }
       return updated;
     }
     return null;
@@ -599,10 +636,57 @@ class DataStore {
   addReview(review) {
     this.data.reviews.unshift(review);
     this.persist();
+    if (mongoose.connection.readyState === 1) {
+      Review.findByIdAndUpdate(review._id, review, { upsert: true }).catch(() => {});
+    }
     return review;
   }
 }
 export const dbStore = new DataStore();
+
+export async function syncAllToMongoDB() {
+  if (mongoose.connection.readyState !== 1) return;
+  try {
+    const data = dbStore.data;
+    if (data.users?.length) {
+      for (const u of data.users) {
+        await User.findByIdAndUpdate(u._id, u, { upsert: true, new: true, setDefaultsOnInsert: true });
+      }
+    }
+    if (data.bookings?.length) {
+      for (const b of data.bookings) {
+        await Booking.findByIdAndUpdate(b._id, b, { upsert: true, new: true, setDefaultsOnInsert: true });
+      }
+    }
+    if (data.inquiries?.length) {
+      for (const i of data.inquiries) {
+        await Inquiry.findByIdAndUpdate(i._id, i, { upsert: true, new: true, setDefaultsOnInsert: true });
+      }
+    }
+    if (data.partnerProfiles?.length) {
+      for (const p of data.partnerProfiles) {
+        await PartnerProfile.findByIdAndUpdate(p._id, p, { upsert: true, new: true, setDefaultsOnInsert: true });
+      }
+    }
+    if (data.services?.length) {
+      for (const s of data.services) {
+        await Service.findByIdAndUpdate(s._id, s, { upsert: true, new: true, setDefaultsOnInsert: true });
+      }
+    }
+    if (data.pricingRules) {
+      await PricingRule.findByIdAndUpdate(data.pricingRules._id, data.pricingRules, { upsert: true, new: true, setDefaultsOnInsert: true });
+    }
+    if (data.reviews?.length) {
+      for (const r of data.reviews) {
+        await Review.findByIdAndUpdate(r._id, r, { upsert: true, new: true, setDefaultsOnInsert: true });
+      }
+    }
+    console.log("✅ Synced MoveBandhu data into MongoDB Atlas (database: movebandhu).");
+  } catch (err) {
+    console.warn("⚠️ MongoDB auto-sync notice:", err.message);
+  }
+}
+
 export async function connectMongoDB() {
   const uri = process.env.MONGODB_URI;
   if (!uri) {
@@ -614,6 +698,7 @@ export async function connectMongoDB() {
       dbName: "movebandhu"
     });
     console.log("✅ Connected to MongoDB Atlas successfully (database: movebandhu).");
+    await syncAllToMongoDB();
     return true;
   } catch (err) {
     console.warn("⚠️ MongoDB connection failed. Continuing with persistent MoveBandhu store fallback.", err.message);

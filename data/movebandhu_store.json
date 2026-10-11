@@ -49,6 +49,16 @@
       "role": "customer",
       "createdAt": "2026-10-11T08:34:08.220Z",
       "updatedAt": "2026-10-11T08:34:08.220Z"
+    },
+    {
+      "_id": "usr-1791711168666",
+      "name": "Aryan Patil",
+      "email": "anyabar458@gmail.com",
+      "phone": "8208291004",
+      "passwordHash": "$2b$10$tHWATXj8AeOJWSGjMxcg7uJm4kAOmbg2IXNGKOxogS5z9pcM7x5Lq",
+      "role": "partner",
+      "createdAt": "2026-10-11T09:32:48.666Z",
+      "updatedAt": "2026-10-11T09:32:48.666Z"
     }
   ],
   "partnerProfiles": [
@@ -135,6 +145,30 @@
       "isAvailable": true,
       "notes": "Highway expert for Satara, Karad, and Pune-Bengaluru NH-48 moves.",
       "createdAt": "2026-10-10T16:23:51.414Z"
+    },
+    {
+      "_id": "prof-1791711168667",
+      "userId": "usr-1791711168666",
+      "businessName": "patil",
+      "vehicleType": "Tata Ace (Chhota Hathi)",
+      "vehicleNumber": "MH 09 CW ",
+      "serviceCategories": [
+        "home-shifting",
+        "mini-truck-tempo"
+      ],
+      "operatingLocations": [
+        "Rajarampuri",
+        "Tarabai Park",
+        "Shiroli MIDC"
+      ],
+      "experienceYears": 3,
+      "helpersCount": 2,
+      "verificationStatus": "pending",
+      "rating": 5,
+      "completedTrips": 0,
+      "isAvailable": true,
+      "notes": "",
+      "createdAt": "2026-10-11T09:32:48.667Z"
     }
   ],
   "services": [
