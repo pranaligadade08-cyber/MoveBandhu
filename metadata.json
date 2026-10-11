@@ -1,0 +1,6 @@
+{
+  "name": "MoveMate Kolhapur",
+  "description": "Premier local home-shifting, furniture transport, and logistics marketplace for Kolhapur, Sangli, and Satara. Move anything without the headache.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

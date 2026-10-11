@@ -1,0 +1,370 @@
+{
+  "users": [
+    {
+      "_id": "usr-admin-1",
+      "name": "MoveBandhu Kolhapur Admin",
+      "email": "admin@movebandhu.in",
+      "phone": "+918855029692",
+      "passwordHash": "$2b$10$abIXF.wzUdSoYuja5gMWRewa1I60Dm9Z/KSxd/ljxfT/8CbUNbxhi",
+      "role": "admin",
+      "createdAt": "2026-10-10T16:23:51.413Z",
+      "updatedAt": "2026-10-10T16:23:51.413Z"
+    },
+    {
+      "_id": "usr-partner-1",
+      "name": "Santosh Patil",
+      "email": "partner@movebandhu.in",
+      "phone": "+919822345678",
+      "passwordHash": "$2b$10$abIXF.wzUdSoYuja5gMWRe5BceKtFtTCRWkPfv5jVTLmOzDHnu6W2",
+      "role": "partner",
+      "createdAt": "2026-10-10T16:23:51.413Z",
+      "updatedAt": "2026-10-10T16:23:51.413Z"
+    },
+    {
+      "_id": "usr-partner-2",
+      "name": "Sachin Chougule",
+      "email": "sachin.trans@movebandhu.in",
+      "phone": "+919850123456",
+      "passwordHash": "$2b$10$abIXF.wzUdSoYuja5gMWRe5BceKtFtTCRWkPfv5jVTLmOzDHnu6W2",
+      "role": "partner",
+      "createdAt": "2026-10-10T16:23:51.413Z",
+      "updatedAt": "2026-10-10T16:23:51.413Z"
+    },
+    {
+      "_id": "usr-partner-3",
+      "name": "Tanaji More",
+      "email": "tanaji.satara@movebandhu.in",
+      "phone": "+919881123456",
+      "passwordHash": "$2b$10$abIXF.wzUdSoYuja5gMWRe5BceKtFtTCRWkPfv5jVTLmOzDHnu6W2",
+      "role": "partner",
+      "createdAt": "2026-10-10T16:23:51.413Z",
+      "updatedAt": "2026-10-10T16:23:51.413Z"
+    },
+    {
+      "_id": "usr-1791707648220",
+      "name": "Aniket Bandgar",
+      "email": "anyabandgar458@gmail.com",
+      "phone": "8855029692",
+      "passwordHash": "$2b$10$IJ4Mw4K3nnNGjjADBbde4uJeNR5Sg0TS0shnPeIG2e6X2Ud0GpExe",
+      "role": "customer",
+      "createdAt": "2026-10-11T08:34:08.220Z",
+      "updatedAt": "2026-10-11T08:34:08.220Z"
+    }
+  ],
+  "partnerProfiles": [
+    {
+      "_id": "prof-part-1",
+      "userId": "usr-partner-1",
+      "businessName": "Patil Kolhapur Cargo Express",
+      "vehicleType": "Tata Ace (Chhota Hathi)",
+      "vehicleNumber": "MH 09 CW 4512",
+      "serviceCategories": [
+        "home-shifting",
+        "furniture-transport",
+        "mini-truck-tempo",
+        "single-item-transport"
+      ],
+      "operatingLocations": [
+        "Rajarampuri",
+        "Tarabai Park",
+        "Shahupuri",
+        "Shiroli MIDC",
+        "Nagala Park"
+      ],
+      "experienceYears": 7,
+      "helpersCount": 2,
+      "verificationStatus": "approved",
+      "rating": 4.9,
+      "completedTrips": 184,
+      "isAvailable": true,
+      "notes": "Reliable with protective blankets and experienced loaders.",
+      "createdAt": "2026-10-10T16:23:51.413Z"
+    },
+    {
+      "_id": "prof-part-2",
+      "userId": "usr-partner-2",
+      "businessName": "Chougule Sangli & Miraj Shifting",
+      "vehicleType": "Tata Ace (Chhota Hathi)",
+      "vehicleNumber": "MH 10 DJ 2234",
+      "serviceCategories": [
+        "home-shifting",
+        "furniture-transport",
+        "mini-truck-tempo",
+        "goods-transport"
+      ],
+      "operatingLocations": [
+        "Vishrambag",
+        "Kupwad MIDC",
+        "Miraj City",
+        "Islampur",
+        "Madhavnagar"
+      ],
+      "experienceYears": 6,
+      "helpersCount": 2,
+      "verificationStatus": "approved",
+      "rating": 4.9,
+      "completedTrips": 154,
+      "isAvailable": true,
+      "notes": "Specializes in Sangli-Miraj twin city moves and Islampur shifting.",
+      "createdAt": "2026-10-10T16:23:51.414Z"
+    },
+    {
+      "_id": "prof-part-3",
+      "userId": "usr-partner-3",
+      "businessName": "More Satara & Karad Cargo Logistics",
+      "vehicleType": "Bolero Maxi Truck",
+      "vehicleNumber": "MH 11 AK 7890",
+      "serviceCategories": [
+        "home-shifting",
+        "office-relocation",
+        "goods-transport",
+        "construction-materials"
+      ],
+      "operatingLocations": [
+        "Powai Naka",
+        "Satara MIDC",
+        "Karad City",
+        "Wai",
+        "Shirwal"
+      ],
+      "experienceYears": 8,
+      "helpersCount": 3,
+      "verificationStatus": "approved",
+      "rating": 4.9,
+      "completedTrips": 210,
+      "isAvailable": true,
+      "notes": "Highway expert for Satara, Karad, and Pune-Bengaluru NH-48 moves.",
+      "createdAt": "2026-10-10T16:23:51.414Z"
+    }
+  ],
+  "services": [
+    {
+      "_id": "srv-1",
+      "key": "home-shifting",
+      "nameEn": "Complete Home Shifting",
+      "nameMr": "घर स्थलांतर सेवा",
+      "nameHi": "सम्पूर्ण घर शिफ्टिंग",
+      "descriptionEn": "End-to-end relocation for apartments, bungalows, and flats with careful packing, loading, and safe transport across Kolhapur.",
+      "descriptionMr": "कोल्हापुरात फ्लॅट, बंगला आणि घरांचे सुरक्षित पॅकिंग, लोडिंग आणि वाहतूक सेवेसह संपूर्ण स्थलांतर.",
+      "descriptionHi": "अपार्टमेंट और घरों की सुरक्षित पैकिंग, लोडिंग और परिवहन के साथ आसान और संपूर्ण शिफ्टिंग।",
+      "iconName": "Home",
+      "basePrice": 2200,
+      "vehicleRecommendation": "Tata Ace / 14ft Eicher",
+      "isActive": true
+    },
+    {
+      "_id": "srv-2",
+      "key": "furniture-transport",
+      "nameEn": "Furniture Transport",
+      "nameMr": "फर्निचर वाहतूक",
+      "nameHi": "फर्नीचर परिवहन",
+      "descriptionEn": "Safe transit for sofas, dining sets, wardrobes, wooden beds, and office chairs with scratch-guard blankets.",
+      "descriptionMr": "सोफा, कपाट, डायनिंग टेबल, लाकडी बेड इत्यादींचे स्क्रॅच-प्रूफ ब्लँकेटने सुरक्षित वहन.",
+      "descriptionHi": "सोफा, अलमारी, डाइनिंग टेबल और पलंग की स्क्रैच-फ्री सुरक्षित ढुलाई।",
+      "iconName": "Armchair",
+      "basePrice": 950,
+      "vehicleRecommendation": "Tata Ace / Piaggio Ape",
+      "isActive": true
+    },
+    {
+      "_id": "srv-3",
+      "key": "mini-truck-tempo",
+      "nameEn": "Mini Truck & Tempo Booking",
+      "nameMr": "मिनी ट्रक आणि टेम्पो बुकिंग",
+      "nameHi": "मिनी ट्रक व टेम्पो बुकिंग",
+      "descriptionEn": "Verified local Tata Ace (Chhota Hathi), Bolero Maxi Truck, and Piaggio commercial tempos for on-demand hire.",
+      "descriptionMr": "स्थानिक विश्वसनीय टाटा एस (छोटा हाथी), बोलेरो मॅक्सी ट्रक व टेम्पो त्वरित भाड्याने.",
+      "descriptionHi": "लोकल विश्वसनीय टाटा एस, बोलेरो पिकअप और टेम्पो तत्काल बुकिंग के लिए।",
+      "iconName": "Truck",
+      "basePrice": 750,
+      "vehicleRecommendation": "Tata Ace / Bolero Pickup",
+      "isActive": true
+    },
+    {
+      "_id": "srv-4",
+      "key": "loading-unloading",
+      "nameEn": "Loading & Unloading Workers",
+      "nameMr": "सामान चढवणे आणि उतरवणे (हमाल)",
+      "nameHi": "लोडिंग एवं अनलोडिंग मजदूर",
+      "descriptionEn": "Experienced and disciplined local helpers to handle heavy appliances, floor-climbing, and careful loading.",
+      "descriptionMr": "जड वस्तू, कपाटे आणि फ्रिज सुरक्षित जिन्यावरून चढवणे व उतरवण्यासाठी अनुभवी हमाल मदतनीस.",
+      "descriptionHi": "भारी सामान, सीढ़ियों से चढ़ाना-उतारना और सुरक्षित लोडिंग के लिए कुशल सहायक।",
+      "iconName": "Users",
+      "basePrice": 400,
+      "vehicleRecommendation": "N/A (Labor only)",
+      "isActive": true
+    },
+    {
+      "_id": "srv-5",
+      "key": "packing-wrapping",
+      "nameEn": "Packing & Wrapping",
+      "nameMr": "पॅकिंग आणि सुरक्षित गुंडाळणी",
+      "nameHi": "पैकिंग और सुरक्षित रैपिंग",
+      "descriptionEn": "Industrial bubble wrap, corrugated sheets, stretch film, and sturdy carton boxes for electronics and crockery.",
+      "descriptionMr": "इलेक्ट्रॉनिक्स, टीव्ही आणि काचेच्या नाजूक साहित्यासाठी बबल रॅप, बॉक्स व मजबूत पॅकिंग.",
+      "descriptionHi": "टीवी, फ्रिज और कांच के बर्तनों के लिए बबल रैप व प्रीमियम बॉक्स पैकिंग।",
+      "iconName": "PackageCheck",
+      "basePrice": 600,
+      "vehicleRecommendation": "N/A (Materials & Labor)",
+      "isActive": true
+    },
+    {
+      "_id": "srv-6",
+      "key": "dismantle-assemble",
+      "nameEn": "Furniture Dismantling & Assembly",
+      "nameMr": "फर्निचर उघडणे आणि पुन्हा जोडणे",
+      "nameHi": "फर्नीचर डिसमेंटल एवं असेंबली",
+      "descriptionEn": "Carpentry assistance for modular wardrobes, king-size hydraulic beds, and wall-mounted shelves.",
+      "descriptionMr": "हायड्रॉलिक बेड, मॉड्युलर कपाट आणि कर्टन रॉड व्यवस्थित खोलणे व नवीन घरी बसवून देणे.",
+      "descriptionHi": "हाइड्रोलिक बेड, मॉड्यूलर अलमारी खोलना और नए घर में सही तरीके से दोबारा फिट करना।",
+      "iconName": "Wrench",
+      "basePrice": 500,
+      "vehicleRecommendation": "N/A (Carpenter service)",
+      "isActive": true
+    },
+    {
+      "_id": "srv-7",
+      "key": "office-relocation",
+      "nameEn": "Office Relocation",
+      "nameMr": "कार्यालय व दुकान स्थलांतर",
+      "nameHi": "ऑफिस और दुकान शिफ्टिंग",
+      "descriptionEn": "Commercial moves for IT cabins, retail shops, clinics, and showrooms with minimum business downtime.",
+      "descriptionMr": "दुकान, क्लिनिक, शोरूम आणि ऑफिसचे त्वरित व नियोजनबद्ध शिफ्टिंग.",
+      "descriptionHi": "कमर्शियल ऑफिस, क्लिनिक और दुकानों की बिना रुकावट सुगम शिफ्टिंग।",
+      "iconName": "Building2",
+      "basePrice": 3500,
+      "vehicleRecommendation": "14ft / 17ft Closed Container",
+      "isActive": true
+    },
+    {
+      "_id": "srv-8",
+      "key": "single-item-transport",
+      "nameEn": "Single-Item Transport",
+      "nameMr": "एकल वस्तू वाहतूक (सिंगल आयटम)",
+      "nameHi": "सिंगल आइटम ट्रांसपोर्ट",
+      "descriptionEn": "Quick shifting for a single refrigerator, washing machine, almirah, or mattress at affordable mini rates.",
+      "descriptionMr": "फक्त एक फ्रिज, वॉशिंग मशीन किंवा गादी हलवण्यासाठी परवडणाऱ्या दरात जलद सेवा.",
+      "descriptionHi": "केवल एक फ्रिज, वाशिंग मशीन या गद्दा किफायती दर पर ले जाने की सेवा।",
+      "iconName": "Box",
+      "basePrice": 550,
+      "vehicleRecommendation": "Piaggio Ape / 3-Wheeler Tempo",
+      "isActive": true
+    },
+    {
+      "_id": "srv-9",
+      "key": "goods-transport",
+      "nameEn": "Local Goods Transportation",
+      "nameMr": "स्थानिक माल वाहतूक (व्यापारी)",
+      "nameHi": "स्थानीय माल परिवहन",
+      "descriptionEn": "Daily business logistics between Laxmipuri, Gandhinagar cloth market, and Shiroli/Gokul Shirgaon MIDC.",
+      "descriptionMr": "लक्ष्मीपुरी, गांधीनगर मार्केट आणि शिरोली/गोकुळ शिरगाव एमआयडीसी दरम्यान नियमित मालवाहतूक.",
+      "descriptionHi": "लक्ष्मीपुरी और गांधीनगर मार्केट से शहर के विभिन्न हिस्सों में नियमित माल ढुलाई।",
+      "iconName": "Boxes",
+      "basePrice": 850,
+      "vehicleRecommendation": "Tata Ace / Bolero Pickup",
+      "isActive": true
+    },
+    {
+      "_id": "srv-10",
+      "key": "construction-materials",
+      "nameEn": "Construction Material Transport",
+      "nameMr": "बांधकाम साहित्य वाहतूक",
+      "nameHi": "निर्माण सामग्री परिवहन",
+      "descriptionEn": "Tiles, sanitaryware, paint drums, pipes, and hardware supply delivery directly to your building site.",
+      "descriptionMr": "टाईल्स, सॅनिटरी, पेंट्स, पाईप्स व हार्डवेअर साहित्य साईटवर थेट पोहोचवणे.",
+      "descriptionHi": "टाइल्स, हार्डवेयर, पाइप और पेंट ड्रम कंस्ट्रक्शन साइट पर सीधे पहुँचाना।",
+      "iconName": "Hammer",
+      "basePrice": 900,
+      "vehicleRecommendation": "Bolero Pickup / Tipper",
+      "isActive": true
+    }
+  ],
+  "pricingRules": {
+    "_id": "pricing-kop-default",
+    "baseCityDistanceKm": 5,
+    "baseRate": 750,
+    "perKmRate": 35,
+    "helperRate": 400,
+    "floorChargePerFloor": 150,
+    "packingRates": {
+      "none": 0,
+      "standard": 600,
+      "premium": 1400
+    },
+    "vehicleMultipliers": {
+      "three_wheeler": 0.85,
+      "tata_ace": 1,
+      "bolero_pickup": 1.25,
+      "eicher_14ft": 1.7,
+      "truck_17ft": 2.2
+    },
+    "propertyMultipliers": {
+      "single_item": 0.6,
+      "1_rk": 0.85,
+      "1_bhk": 1,
+      "2_bhk": 1.4,
+      "3_bhk": 1.9,
+      "villa_office": 2.5
+    },
+    "updatedAt": "2026-10-10T16:23:51.117Z"
+  },
+  "inquiries": [],
+  "bookings": [],
+  "reviews": [
+    {
+      "_id": "rev-1",
+      "bookingReference": "BK-KOP-7821",
+      "customerName": "Anand Shinde",
+      "rating": 5,
+      "commentEn": "Shifted my complete 2 BHK from Shahupuri to Tarabai Park in just 4 hours. Santosh Patil and his team handled the glass dining table with extreme care. Highly recommend MoveBandhu!",
+      "commentMr": "शाहूपुरी ते ताराबाई पार्क २ बीएचके स्थलांतर फक्त ४ तासांत पूर्ण झाले. काचेचे टेबल अत्यंत सुरक्षितपणे पोहोचवले. धन्यवाद मूवमेट!",
+      "serviceName": "Complete Home Shifting",
+      "location": "Shahupuri, Kolhapur",
+      "createdAt": "2026-10-06T16:23:51.414Z"
+    },
+    {
+      "_id": "rev-2",
+      "bookingReference": "BK-KOP-8012",
+      "customerName": "Priyanka Kadam",
+      "rating": 5,
+      "commentEn": "Needed urgent sofa and wardrobe transport from Rajarampuri to Kasaba Bawada. The Tata Ace arrived in 25 mins. Fair pricing with zero bargaining headache.",
+      "commentMr": "राजारामपुरी ते कसबा बावडा सोफा आणि कपाट नेण्यासाठी टेम्पो २५ मिनिटांत हजर झाला. कोणतेही वादविवाद न करता पारदर्शक दर.",
+      "serviceName": "Furniture Transport",
+      "location": "Rajarampuri, Kolhapur",
+      "createdAt": "2026-10-03T16:23:51.414Z"
+    },
+    {
+      "_id": "rev-3",
+      "bookingReference": "BK-KOP-8245",
+      "customerName": "Mahesh Ghatge",
+      "rating": 5,
+      "commentEn": "Moved my hardware stock to Shiroli MIDC. Honest helpers, proper loading straps, and clear communication on WhatsApp.",
+      "commentMr": "शिरोली एमआयडीसी येथे मालवाहतूक करण्यासाठी उत्तम सेवा. हमालांचे काम शिस्तबद्ध होते.",
+      "serviceName": "Local Goods Transportation",
+      "location": "Shiroli MIDC, Kolhapur",
+      "createdAt": "2026-09-29T16:23:51.414Z"
+    },
+    {
+      "_id": "rev-4",
+      "bookingReference": "BK-SGL-8490",
+      "customerName": "Suresh Patil",
+      "rating": 5,
+      "commentEn": "Shifted our flat from Vishrambag, Sangli to Kolhapur Tarabai Park. Smooth transit on Sangli-Kolhapur road with no damage.",
+      "commentMr": "विश्रामबाग (सांगली) ते ताराबाई पार्क (कोल्हापूर) घर शिफ्ट केले. सर्व फर्निचर अत्यंत सुरक्षित पोहोचले.",
+      "serviceName": "Complete Home Shifting",
+      "location": "Vishrambag, Sangli",
+      "createdAt": "2026-10-05T16:23:51.414Z"
+    },
+    {
+      "_id": "rev-5",
+      "bookingReference": "BK-STR-9021",
+      "customerName": "Dr. Vikram Deshmukh",
+      "rating": 5,
+      "commentEn": "Clinic shifting from Sadar Bazar Satara to Karad. Heavy medical cabinets transported punctually on NH-48.",
+      "commentMr": "सातारा ते कराड क्लिनिकचे शिफ्टिंग वेळेवर आणि शिस्तबद्ध पद्धतीने पूर्ण झाले.",
+      "serviceName": "Office & Clinic Relocation",
+      "location": "Sadar Bazar, Satara",
+      "createdAt": "2026-10-08T16:23:51.414Z"
+    }
+  ]
+}
